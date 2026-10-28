@@ -15,6 +15,13 @@ fi
 
 unset CC CXX # meson wants these unset
 
+# Local patches (HDR output on Android), stored next to this script.
+# -N skips patches that are already applied.
+for f in ../../scripts/mpv-*.patch; do
+	[ -f "$f" ] || continue
+	patch -p1 -N -r - <"$f" || echo "Note: $f not applied (already applied?)"
+done
+
 meson setup $build --cross-file "$prefix_dir"/crossfile.txt \
 	--default-library shared \
 	-Diconv=disabled -D{lua,libcurl}=enabled \
