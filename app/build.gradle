@@ -42,6 +42,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            // installs next to the Play Store mpv instead of replacing it
+            applicationIdSuffix ".hdr"
+            versionNameSuffix "-hdr"
+        }
         release {
             minifyEnabled = true
             shrinkResources = true
